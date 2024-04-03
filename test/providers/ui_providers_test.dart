@@ -611,4 +611,23 @@ void main() {
       );
     });
   });
+
+  group('Testing saveDataStateProvider', () {
+    testWidgets('It should be false initially', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: CollectionPane(),
+            ),
+          ),
+        ),
+      );
+
+      final collectionPane = tester.element(find.byType(CollectionPane));
+      final container = ProviderScope.containerOf(collectionPane);
+      final saveDataState = container.read(saveDataStateProvider);
+      expect(saveDataState, isFalse);
+    });
+  });
 }
