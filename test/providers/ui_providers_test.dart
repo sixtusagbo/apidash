@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:apidash/consts.dart';
 import 'package:apidash/providers/providers.dart';
 import 'package:apidash/screens/dashboard.dart';
 import 'package:apidash/screens/home_page/collection_pane.dart';
@@ -628,6 +629,44 @@ void main() {
       final container = ProviderScope.containerOf(collectionPane);
       final saveDataState = container.read(saveDataStateProvider);
       expect(saveDataState, isFalse);
+    });
+
+    testWidgets('When the "Save" button is clicked state should change to true',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: CollectionPane(),
+            ),
+          ),
+        ),
+      );
+
+      // Initially, there's no data to save
+      // So the "Save" button should be disabled
+
+      // Tap on the "Plus New" button to make a change
+      final newButton = find.descendant(
+        of: find.byType(ElevatedButton),
+        matching: find.text(kLabelPlusNew),
+      );
+      expect(newButton, findsOneWidget);
+
+      await tester.tap(newButton);
+      await tester.pump();
+
+      // Save
+      final saveButton = find.byIcon(Icons.save);
+      expect(saveButton, findsOneWidget);
+
+      await tester.tap(saveButton);
+      await tester.pump();
+
+      final collectionPane = tester.element(find.byType(CollectionPane));
+      final container = ProviderScope.containerOf(collectionPane);
+      final saveDataState = container.read(saveDataStateProvider);
+      expect(saveDataState, isTrue);
     });
   });
 }
