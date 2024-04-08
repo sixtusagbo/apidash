@@ -272,6 +272,8 @@ const kDefaultContentType = ContentType.json;
 enum CodegenLanguage {
   curl("cURL", "bash", "curl"),
   har("HAR", "json", "har"),
+  cCurlCodeGen("C (Curl)", "C", "c"),
+  cSharpRestSharp("C# (Rest Sharp)", "cs", "cs"),
   dartHttp("Dart (http)", "dart", "dart"),
   dartDio("Dart (dio)", "dart", "dart"),
   goHttp("Go (http)", "go", "go"),
@@ -282,6 +284,8 @@ enum CodegenLanguage {
   kotlinOkHttp("Kotlin (okhttp3)", "java", "kt"),
   pythonRequests("Python (requests)", "python", "py"),
   pythonHttpClient("Python (http.client)", "python", "py"),
+  rubyFaraday("Ruby (Faraday)", "ruby", "rb"),
+  rubyNetHttp("Ruby (Net::Http)", "Ruby", "rb"),
   rustActix("Rust (Actix Client)", "rust", "rs"),
   rustReqwest("Rust (reqwest)", "rust", "rs"),
   rustCurl("Rust (curl-rust)", "rust", "rs"),
@@ -289,9 +293,11 @@ enum CodegenLanguage {
   javaOkHttp("Java (okhttp3)", "java", 'java'),
   javaAsyncHttpClient("Java (asynchttpclient)", "java", "java"),
   javaHttpClient("Java (HttpClient)", "java", "java"),
+  javaUnirest("Java (Unirest)", "java", "java"),
   juliaHttp("Julia (HTTP)", "julia", "jl"),
+  phpCurl("PHP (cURL)", "php", "php"),
   phpGuzzle("PHP (guzzle)", "php", "php"),
-  phpCurl("PHP (curl)", "php", "php");
+  phpHttpPlug("PHP (httpPlug)", "php", "php");
 
   const CodegenLanguage(this.label, this.codeHighlightLang, this.ext);
   final String label;
@@ -314,6 +320,8 @@ const kSubTypeXml = 'xml';
 const kSubTypeYaml = 'yaml';
 const kSubTypeXYaml = 'x-yaml';
 const kSubTypeYml = 'x-yml';
+// in future need to add support for url-encoded form data
+const kSubTypeXWwwFormUrlencoded = 'x-www-form-urlencoded';
 
 const kTypeText = 'text';
 // text
